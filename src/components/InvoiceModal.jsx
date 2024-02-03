@@ -179,7 +179,6 @@ const InvoiceModal = (props) => {
           </Row>
         </div>
       </Modal>
-      <hr className="mt-4 mb-3" />
     </div>
   );
 };
