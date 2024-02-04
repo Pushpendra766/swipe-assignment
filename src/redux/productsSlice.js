@@ -1,38 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import productData from "../utils/productData";
 
 const productsSlice = createSlice({
   name: "products",
   initialState: {
-    products: [
-      {
-        id: 1,
-        name: "Choco",
-        sellingPrice: 30,
-        buyingPrice: 25,
-        quantityAvailable: 20,
-      },
-      {
-        id: 2,
-        name: "Water Bottle",
-        sellingPrice: 20,
-        buyingPrice: 15,
-        quantityAvailable: 30,
-      },
-      {
-        id: 3,
-        name: "Toothbrush",
-        sellingPrice: 25,
-        buyingPrice: 20,
-        quantityAvailable: 60,
-      },
-      {
-        id: 4,
-        name: "Textbook",
-        sellingPrice: 50,
-        buyingPrice: 45,
-        quantityAvailable: 30,
-      },
-    ],
+    products: productData,
   },
   reducers: {
     addProduct: (state, action) => {
