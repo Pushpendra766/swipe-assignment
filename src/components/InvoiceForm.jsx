@@ -308,46 +308,7 @@ const InvoiceForm = () => {
               currency={formData.currency}
               items={formData.items}
             />
-            <Row className="mt-4 justify-content-end">
-              <Col lg={6}>
-                <div className="d-flex flex-row align-items-start justify-content-between">
-                  <span className="fw-bold">Subtotal:</span>
-                  <span>
-                    {formData.currency}
-                    {formData.subTotal}
-                  </span>
-                </div>
-                <div className="d-flex flex-row align-items-start justify-content-between mt-2">
-                  <span className="fw-bold">Discount:</span>
-                  <span>
-                    <span className="small">
-                      ({formData.discountRate || 0}%)
-                    </span>
-                    {formData.currency}
-                    {formData.discountAmount || 0}
-                  </span>
-                </div>
-                <div className="d-flex flex-row align-items-start justify-content-between mt-2">
-                  <span className="fw-bold">Tax:</span>
-                  <span>
-                    <span className="small">({formData.taxRate || 0}%)</span>
-                    {formData.currency}
-                    {formData.taxAmount || 0}
-                  </span>
-                </div>
-                <hr />
-                <div
-                  className="d-flex flex-row align-items-start justify-content-between"
-                  style={{ fontSize: "1.125rem" }}
-                >
-                  <span className="fw-bold">Total:</span>
-                  <span className="fw-bold">
-                    {formData.currency}
-                    {formData.total || 0}
-                  </span>
-                </div>
-              </Col>
-            </Row>
+
             <hr className="my-4" />
             <Form.Label className="fw-bold">Notes:</Form.Label>
             <Form.Control
@@ -362,122 +323,164 @@ const InvoiceForm = () => {
           </Card>
         </Col>
         <Col md={4} lg={3}>
-          <div className="sticky-top pt-md-3 pt-xl-4">
-            <Button
-              variant="dark"
-              onClick={handleAddInvoice}
-              className="d-block w-100 mb-2"
-            >
-              {isEdit ? "Update Invoice" : "Add Invoice"}
-            </Button>
-            <Button variant="primary" type="submit" className="d-block w-100">
-              Review Invoice
-            </Button>
-            <InvoiceModal
-              showModal={isOpen}
-              closeModal={closeModal}
-              info={{
-                isOpen,
-                id: formData.id,
-                currency: formData.currency,
-                currentDate: formData.currentDate,
-                invoiceNumber: formData.invoiceNumber,
-                dateOfIssue: formData.dateOfIssue,
-                billTo: formData.billTo,
-                billToEmail: formData.billToEmail,
-                billToAddress: formData.billToAddress,
-                billFrom: formData.billFrom,
-                billFromEmail: formData.billFromEmail,
-                billFromAddress: formData.billFromAddress,
-                notes: formData.notes,
-                total: formData.total,
-                subTotal: formData.subTotal,
-                taxRate: formData.taxRate,
-                taxAmount: formData.taxAmount,
-                discountRate: formData.discountRate,
-                discountAmount: formData.discountAmount,
-              }}
-              items={formData.items}
-              currency={formData.currency}
-              subTotal={formData.subTotal}
-              taxAmount={formData.taxAmount}
-              discountAmount={formData.discountAmount}
-              total={formData.total}
-            />
-            <Form.Group className="mb-3">
-              <Form.Label className="fw-bold">Currency:</Form.Label>
-              <Form.Select
-                onChange={(event) =>
-                  onCurrencyChange({ currency: event.target.value })
-                }
-                className="btn btn-light my-1"
-                aria-label="Change Currency"
+          <Card className="p-4 py-xl-5  my-3 my-xl-4">
+            <div className="sticky-top">
+              <InvoiceModal
+                showModal={isOpen}
+                closeModal={closeModal}
+                info={{
+                  isOpen,
+                  id: formData.id,
+                  currency: formData.currency,
+                  currentDate: formData.currentDate,
+                  invoiceNumber: formData.invoiceNumber,
+                  dateOfIssue: formData.dateOfIssue,
+                  billTo: formData.billTo,
+                  billToEmail: formData.billToEmail,
+                  billToAddress: formData.billToAddress,
+                  billFrom: formData.billFrom,
+                  billFromEmail: formData.billFromEmail,
+                  billFromAddress: formData.billFromAddress,
+                  notes: formData.notes,
+                  total: formData.total,
+                  subTotal: formData.subTotal,
+                  taxRate: formData.taxRate,
+                  taxAmount: formData.taxAmount,
+                  discountRate: formData.discountRate,
+                  discountAmount: formData.discountAmount,
+                }}
+                items={formData.items}
+                currency={formData.currency}
+                subTotal={formData.subTotal}
+                taxAmount={formData.taxAmount}
+                discountAmount={formData.discountAmount}
+                total={formData.total}
+              />
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-bold">Currency:</Form.Label>
+                <Form.Select
+                  onChange={(event) =>
+                    onCurrencyChange({ currency: event.target.value })
+                  }
+                  className="btn btn-light my-1"
+                  aria-label="Change Currency"
+                >
+                  <option value="$">USD (United States Dollar)</option>
+                  <option value="£">GBP (British Pound Sterling)</option>
+                  <option value="¥">JPY (Japanese Yen)</option>
+                  <option value="$">CAD (Canadian Dollar)</option>
+                  <option value="$">AUD (Australian Dollar)</option>
+                  <option value="$">SGD (Singapore Dollar)</option>
+                  <option value="¥">CNY (Chinese Renminbi)</option>
+                  <option value="₿">BTC (Bitcoin)</option>
+                </Form.Select>
+              </Form.Group>
+              <Form.Group className="my-3">
+                <Form.Label className="fw-bold">Tax rate:</Form.Label>
+                <InputGroup className="my-1 flex-nowrap">
+                  <Form.Control
+                    name="taxRate"
+                    type="number"
+                    value={formData.taxRate}
+                    onChange={(e) => editField(e.target.name, e.target.value)}
+                    className="bg-white border"
+                    placeholder="0.0"
+                    min="0.00"
+                    step="0.01"
+                    max="100.00"
+                  />
+                  <InputGroup.Text className="bg-light fw-bold text-secondary small">
+                    %
+                  </InputGroup.Text>
+                </InputGroup>
+              </Form.Group>
+              <Form.Group className="my-3">
+                <Form.Label className="fw-bold">Discount rate:</Form.Label>
+                <InputGroup className="my-1 flex-nowrap">
+                  <Form.Control
+                    name="discountRate"
+                    type="number"
+                    value={formData.discountRate}
+                    onChange={(e) => editField(e.target.name, e.target.value)}
+                    className="bg-white border"
+                    placeholder="0.0"
+                    min="0.00"
+                    step="0.01"
+                    max="100.00"
+                  />
+                  <InputGroup.Text className="bg-light fw-bold text-secondary small">
+                    %
+                  </InputGroup.Text>
+                </InputGroup>
+              </Form.Group>
+              <Row className="mt-4 justify-content-end">
+                <Col>
+                  <div className="d-flex flex-row align-items-start justify-content-between">
+                    <span className="fw-bold">Subtotal:</span>
+                    <span>
+                      {formData.currency}
+                      {formData.subTotal}
+                    </span>
+                  </div>
+                  <div className="d-flex flex-row align-items-start justify-content-between mt-2">
+                    <span className="fw-bold">Discount:</span>
+                    <span>
+                      <span className="small">
+                        ({formData.discountRate || 0}%)
+                      </span>
+                      {formData.currency}
+                      {formData.discountAmount || 0}
+                    </span>
+                  </div>
+                  <div className="d-flex flex-row align-items-start justify-content-between mt-2">
+                    <span className="fw-bold">Tax:</span>
+                    <span>
+                      <span className="small">({formData.taxRate || 0}%)</span>
+                      {formData.currency}
+                      {formData.taxAmount || 0}
+                    </span>
+                  </div>
+                  <hr />
+                  <div
+                    className="d-flex flex-row align-items-start justify-content-between"
+                    style={{ fontSize: "1.125rem" }}
+                  >
+                    <span className="fw-bold">Total:</span>
+                    <span className="fw-bold">
+                      {formData.currency}
+                      {formData.total || 0}
+                    </span>
+                  </div>
+                </Col>
+              </Row>
+              <Button
+                variant="dark"
+                onClick={handleAddInvoice}
+                className="d-block w-100 mt-4 mb-2"
               >
-                <option value="$">USD (United States Dollar)</option>
-                <option value="£">GBP (British Pound Sterling)</option>
-                <option value="¥">JPY (Japanese Yen)</option>
-                <option value="$">CAD (Canadian Dollar)</option>
-                <option value="$">AUD (Australian Dollar)</option>
-                <option value="$">SGD (Singapore Dollar)</option>
-                <option value="¥">CNY (Chinese Renminbi)</option>
-                <option value="₿">BTC (Bitcoin)</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="my-3">
-              <Form.Label className="fw-bold">Tax rate:</Form.Label>
-              <InputGroup className="my-1 flex-nowrap">
-                <Form.Control
-                  name="taxRate"
-                  type="number"
-                  value={formData.taxRate}
-                  onChange={(e) => editField(e.target.name, e.target.value)}
-                  className="bg-white border"
-                  placeholder="0.0"
-                  min="0.00"
-                  step="0.01"
-                  max="100.00"
-                />
-                <InputGroup.Text className="bg-light fw-bold text-secondary small">
-                  %
-                </InputGroup.Text>
-              </InputGroup>
-            </Form.Group>
-            <Form.Group className="my-3">
-              <Form.Label className="fw-bold">Discount rate:</Form.Label>
-              <InputGroup className="my-1 flex-nowrap">
-                <Form.Control
-                  name="discountRate"
-                  type="number"
-                  value={formData.discountRate}
-                  onChange={(e) => editField(e.target.name, e.target.value)}
-                  className="bg-white border"
-                  placeholder="0.0"
-                  min="0.00"
-                  step="0.01"
-                  max="100.00"
-                />
-                <InputGroup.Text className="bg-light fw-bold text-secondary small">
-                  %
-                </InputGroup.Text>
-              </InputGroup>
-            </Form.Group>
-
-            <Form.Control
-              placeholder="Enter Invoice ID"
-              name="copyId"
-              value={copyId}
-              onChange={(e) => setCopyId(e.target.value)}
-              type="text"
-              className="my-2 bg-white border"
-            />
-            <Button
-              variant="primary"
-              onClick={handleCopyInvoice}
-              className="d-block"
-            >
-              Copy Old Invoice
-            </Button>
-          </div>
+                {isEdit ? "Update Invoice" : "Add Invoice"}
+              </Button>
+              <Button variant="primary" type="submit" className="d-block w-100">
+                Review Invoice
+              </Button>
+              <hr />
+              <Form.Control
+                placeholder="Enter Invoice ID"
+                name="copyId"
+                value={copyId}
+                onChange={(e) => setCopyId(e.target.value)}
+                type="text"
+                className="my-2 bg-white border"
+              />
+              <Button
+                variant="primary"
+                onClick={handleCopyInvoice}
+                className="d-block"
+              >
+                Copy Old Invoice
+              </Button>
+            </div>
+          </Card>
         </Col>
       </Row>
     </Form>
