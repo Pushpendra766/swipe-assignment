@@ -301,6 +301,7 @@ const InvoiceForm = () => {
                 />
               </Col>
             </Row>
+            <hr />
             <InvoiceItem
               onItemizedItemEdit={onItemizedItemEdit}
               onRowAdd={handleAddEvent}
@@ -308,7 +309,6 @@ const InvoiceForm = () => {
               currency={formData.currency}
               items={formData.items}
             />
-
             <hr className="my-4" />
             <Form.Label className="fw-bold">Notes:</Form.Label>
             <Form.Control
