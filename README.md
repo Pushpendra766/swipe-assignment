@@ -1,6 +1,6 @@
 # Swipe Assignment
 
-Live Preview - [https://zepto766.netlify.app/](https://zepto766.netlify.app/)
+Live Preview - [https://invoice-generator7.netlify.app/](https://invoice-generator7.netlify.app/)
 
 >Note:- Some of the points provided in the assignment were a bit ambigious and were not making sense if we see from a real-world perspective, so I have made some assumptions, which are listed below.
 
