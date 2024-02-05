@@ -45,8 +45,4 @@ Live Preview - [https://invoice-generator7.netlify.app/](https://invoice-generat
 - [x] Maintain existing standards when creating new features.
 - [x] Create proper documentation.
 - [x] Make the web-app responsive for all screen sizes.
-
-
-Extras
 - [x] Fix Redux error (Invoice data not updating when using invoice update feature)
-- [ ] Write tests for all the new components.
