@@ -15,6 +15,7 @@ import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import generateRandomId from "../utils/generateRandomId";
 import { useInvoiceListData } from "../redux/hooks";
 import { updateProduct } from "../redux/productsSlice";
+import { updateInvoiceItem } from "../redux/invoicesSlice";
 
 const InvoiceForm = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const InvoiceForm = () => {
   const navigate = useNavigate();
   const isCopy = location.pathname.includes("create");
   const isEdit = location.pathname.includes("edit");
-
+  const [editedItems, setEditedItems] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [copyId, setCopyId] = useState("");
   const { getOneInvoice, listSize } = useInvoiceListData();
@@ -113,6 +114,9 @@ const InvoiceForm = () => {
   const onItemizedItemEdit = (evt, id) => {
     const updatedItems = formData.items.map((oldItem) => {
       if (oldItem.itemId === id) {
+        if (!editedItems.includes(id)) {
+          setEditedItems((prevItems) => [...prevItems, id]);
+        }
         return { ...oldItem, [evt.target.name]: evt.target.value };
       }
       return oldItem;
@@ -142,6 +146,27 @@ const InvoiceForm = () => {
   };
 
   const handleAddInvoice = () => {
+    console.log(editedItems, typeof editedItems);
+    if (editedItems.length > 0) {
+      editedItems.forEach((itemId) => {
+        formData.items.forEach((item) => {
+          const updatedProduct = {
+            name: item.itemName,
+            description: item.itemDescription,
+            sellingPrice: item.itemPrice,
+          };
+          if (itemId === item.itemId) {
+            dispatch(
+              updateProduct({ id: itemId, updatedObject: updatedProduct })
+            );
+            dispatch(
+              updateInvoiceItem({ productId: itemId, updatedItem: item })
+            );
+          }
+        });
+      });
+    }
+
     if (isEdit) {
       dispatch(updateInvoice({ id: params.id, updatedInvoice: formData }));
       alert("Invoice updated successfuly 🥳");

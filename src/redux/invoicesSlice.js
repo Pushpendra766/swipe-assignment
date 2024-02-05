@@ -28,7 +28,6 @@ const invoicesSlice = createSlice({
           const index = invoice.items.findIndex(
             (item) => item.itemId === productId
           );
-          console.log("insideee", index, updatedItem);
           state[idx].items[index] = {
             ...state[idx].items[index],
             ...updatedItem,
