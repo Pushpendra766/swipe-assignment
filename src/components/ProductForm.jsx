@@ -82,7 +82,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
             <Form.Label>Description</Form.Label>
             <Form.Control
               required
-              type="text"
+              as="textarea"
               placeholder="Product description"
               value={formData.description}
               onChange={(e) => updateFormData("description", e.target.value)}
@@ -117,12 +117,17 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               type="number"
               placeholder="Quantity"
               value={formData.quantityAvailable}
-              onChange={(e) =>
-                updateFormData("quantityAvailable", e.target.value)
-              }
+              onChange={(e) => {
+                const inputValue = parseInt(e.target.value, 10);
+                if (isNaN(inputValue) || inputValue <= 0) {
+                  updateFormData("quantityAvailable", "");
+                } else {
+                  updateFormData("quantityAvailable", inputValue);
+                }
+              }}
             />
             <Form.Control.Feedback type="invalid">
-              Quantity is required!
+              Quantity is required and must be greater than 0!
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="4">
@@ -134,10 +139,17 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
                 placeholder="Selling Price"
                 required
                 value={formData.sellingPrice}
-                onChange={(e) => updateFormData("sellingPrice", e.target.value)}
+                onChange={(e) => {
+                  const inputValue = parseInt(e.target.value, 10);
+                  if (isNaN(inputValue) || inputValue <= 0) {
+                    updateFormData("quantityAvailable", "");
+                  } else {
+                    updateFormData("sellingPrice", inputValue);
+                  }
+                }}
               />
               <Form.Control.Feedback type="invalid">
-                Selling price is required!
+                Selling price is required and must be greater than 0!
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
@@ -150,10 +162,17 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
                 placeholder="Buying Price"
                 required
                 value={formData.buyingPrice}
-                onChange={(e) => updateFormData("buyingPrice", e.target.value)}
+                onChange={(e) => {
+                  const inputValue = parseInt(e.target.value, 10);
+                  if (isNaN(inputValue) || inputValue <= 0) {
+                    updateFormData("quantityAvailable", "");
+                  } else {
+                    updateFormData("buyingPrice", inputValue);
+                  }
+                }}
               />
               <Form.Control.Feedback type="invalid">
-                Buying price is required!
+                Buying price is required and must be greater than 0!
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
