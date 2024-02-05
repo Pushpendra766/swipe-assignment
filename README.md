@@ -1,5 +1,7 @@
 # Swipe Assignment
 
+Live Preview - [https://zepto766.netlify.app/](https://zepto766.netlify.app/)
+
 >Note:- Some of the points provided in the assignment were a bit ambigious and were not making sense if we see from a real-world perspective, so I have made some assumptions, which are listed below.
 
 ### Assumptions
@@ -9,6 +11,22 @@
 3. Dynamic updation of product information is happening in two way :-
    a. When we change product in products tab, it will reflect in all invoices where that product appears.
    b. When we create new invoice and change the item info, it will reflect in all older invoices where that item appears and in the products tab.
+
+
+### Setup Instructions
+
+1.  Clone repository:
+    ```bash
+    git clone https://github.com/Pushpendra766/zepto-assignment.git
+    ```
+2.  Install
+    ```bash
+    npm install
+    ```
+3.  Run
+    ```bash
+    npm start
+    ```
 
 ### Checklist of tasks 
 - [x] Create new product tab, where all the products are displayed and maintained through Redux.
