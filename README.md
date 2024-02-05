@@ -17,7 +17,7 @@ Live Preview - [https://zepto766.netlify.app/](https://zepto766.netlify.app/)
 
 1.  Clone repository:
     ```bash
-    git clone https://github.com/Pushpendra766/zepto-assignment.git
+    git clone https://github.com/Pushpendra766/swipe-assignment.git
     ```
 2.  Install
     ```bash
