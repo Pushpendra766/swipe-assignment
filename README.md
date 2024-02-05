@@ -2,9 +2,13 @@
 
 Live Preview - [https://invoice-generator7.netlify.app/](https://invoice-generator7.netlify.app/)
 
->Note:- Some of the points provided in the assignment were a bit ambiguous and were not making sense if we see them from a real-world perspective, so I have made some assumptions, which are listed below.
+## Demo
+>Note:- GIF may take some time to load.
+
+![](https://github.com/Pushpendra766/swipe-assignment/blob/main/src/assets/demo.gif)
 
 ### Assumptions
+>Note:- Some of the points provided in the assignment were a bit ambiguous and were not making sense if we see them from a real-world perspective, so I have made some assumptions, which are listed below.
 1. I have assumed that the products tab that you have talked about is a tab where the merchant can maintain the products that he has, so that he can pick the products that a customer bought during invoice creation.
 2. The word "product" and "item" are used interchangeably when we consider "Product tab" and "Invoice Form" respectively. i.e. in the Products tab, I called it “product” and when listing them in invoice I called it "item". Because in the assignment they are mentioned as "products" but in the existing repository they were “items”.
 3. Dynamic updation is done on these properties of products - product name, product description, selling price.
