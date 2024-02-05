@@ -14,6 +14,8 @@ import { addInvoice, updateInvoice } from "../redux/invoicesSlice";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import generateRandomId from "../utils/generateRandomId";
 import { useInvoiceListData } from "../redux/hooks";
+import { updateProduct } from "../redux/productsSlice";
+import { updateInvoiceItem } from "../redux/invoicesSlice";
 
 const InvoiceForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const InvoiceForm = () => {
   const navigate = useNavigate();
   const isCopy = location.pathname.includes("create");
   const isEdit = location.pathname.includes("edit");
-
+  const [editedItems, setEditedItems] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [copyId, setCopyId] = useState("");
   const { getOneInvoice, listSize } = useInvoiceListData();
@@ -54,15 +56,7 @@ const InvoiceForm = () => {
           discountRate: "",
           discountAmount: "0.00",
           currency: "$",
-          items: [
-            {
-              itemId: 0,
-              itemName: "",
-              itemDescription: "",
-              itemPrice: "1.00",
-              itemQuantity: 1,
-            },
-          ],
+          items: [],
         }
   );
 
@@ -71,22 +65,14 @@ const InvoiceForm = () => {
   }, []);
 
   const handleRowDel = (itemToDelete) => {
-    const updatedItems = formData.items.filter(
-      (item) => item.itemId !== itemToDelete.itemId
-    );
+    const updatedItems = formData.items.filter((item) => {
+      return item.itemId !== itemToDelete.itemId;
+    });
     setFormData({ ...formData, items: updatedItems });
     handleCalculateTotal();
   };
 
-  const handleAddEvent = () => {
-    const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    const newItem = {
-      itemId: id,
-      itemName: "",
-      itemDescription: "",
-      itemPrice: "1.00",
-      itemQuantity: 1,
-    };
+  const handleAddEvent = (newItem) => {
     setFormData({
       ...formData,
       items: [...formData.items, newItem],
@@ -128,6 +114,9 @@ const InvoiceForm = () => {
   const onItemizedItemEdit = (evt, id) => {
     const updatedItems = formData.items.map((oldItem) => {
       if (oldItem.itemId === id) {
+        if (!editedItems.includes(id)) {
+          setEditedItems((prevItems) => [...prevItems, id]);
+        }
         return { ...oldItem, [evt.target.name]: evt.target.value };
       }
       return oldItem;
@@ -157,6 +146,27 @@ const InvoiceForm = () => {
   };
 
   const handleAddInvoice = () => {
+    console.log(editedItems, typeof editedItems);
+    if (editedItems.length > 0) {
+      editedItems.forEach((itemId) => {
+        formData.items.forEach((item) => {
+          const updatedProduct = {
+            name: item.itemName,
+            description: item.itemDescription,
+            sellingPrice: item.itemPrice,
+          };
+          if (itemId === item.itemId) {
+            dispatch(
+              updateProduct({ id: itemId, updatedObject: updatedProduct })
+            );
+            dispatch(
+              updateInvoiceItem({ productId: itemId, updatedItem: item })
+            );
+          }
+        });
+      });
+    }
+
     if (isEdit) {
       dispatch(updateInvoice({ id: params.id, updatedInvoice: formData }));
       alert("Invoice updated successfuly 🥳");
@@ -301,14 +311,14 @@ const InvoiceForm = () => {
                 />
               </Col>
             </Row>
+            <hr />
             <InvoiceItem
               onItemizedItemEdit={onItemizedItemEdit}
-              onRowAdd={handleAddEvent}
-              onRowDel={handleRowDel}
+              onRowAdd={(newItem) => handleAddEvent(newItem)}
+              onRowDel={(itemToDelete) => handleRowDel(itemToDelete)}
               currency={formData.currency}
               items={formData.items}
             />
-
             <hr className="my-4" />
             <Form.Label className="fw-bold">Notes:</Form.Label>
             <Form.Control

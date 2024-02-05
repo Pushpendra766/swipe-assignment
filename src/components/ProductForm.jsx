@@ -3,24 +3,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/productsSlice";
-import { useSelector } from "react-redux";
 import { updateProduct } from "../redux/productsSlice";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import { updateInvoiceItem } from "../redux/invoicesSlice";
 
 const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
   const isEdit = Object.keys(currentProduct).length !== 0;
-  const products = useSelector((store) => store.products.products);
-  const productId =
-    products.length > 0 ? products[products.length - 1].id + 1 : 1;
+  const productId = (+new Date() + Math.floor(Math.random() * 999999)).toString(
+    36
+  );
   const [formData, setFormData] = useState({
     id: isEdit ? currentProduct.id : productId,
     name: isEdit ? currentProduct.name : "",
+    description: isEdit ? currentProduct.description : "",
     sellingPrice: isEdit ? currentProduct.sellingPrice : "",
     buyingPrice: isEdit ? currentProduct.buyingPrice : "",
     quantityAvailable: isEdit ? currentProduct.quantityAvailable : "",
+    category: isEdit ? currentProduct.category : "",
   });
 
   const updateFormData = (key, newValue) => {
@@ -29,6 +31,15 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
   const dispatch = useDispatch();
   const handleAddProduct = () => {
     if (isEdit) {
+      const updatedItem = {
+        itemName: formData.name,
+        itemCategory: formData.category,
+        itemDescription: formData.description,
+        itemPrice: formData.sellingPrice,
+      };
+      dispatch(
+        updateInvoiceItem({ productId: currentProduct.id, updatedItem })
+      );
       dispatch(
         updateProduct({ id: currentProduct.id, updatedObject: formData })
       );
@@ -54,7 +65,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
       <h5>Add Product</h5>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="4">
             <Form.Label>Name</Form.Label>
             <Form.Control
               required
@@ -67,7 +78,39 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               Product Name is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="4">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Product description"
+              value={formData.description}
+              onChange={(e) => updateFormData("description", e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid">
+              Product Description is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              as="select"
+              required
+              value={formData.category}
+              onChange={(e) => updateFormData("category", e.target.value)}
+            >
+              <option value="">Select a category</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Electronics">Electronics</option>
+            </Form.Control>
+            <Form.Control.Feedback type="invalid">
+              Please select a category!
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4">
             <Form.Label>Quantity</Form.Label>
             <Form.Control
               required
@@ -82,7 +125,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               Quantity is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="4">
             <Form.Label>Selling Price</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
@@ -98,7 +141,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="4">
             <Form.Label>Buying Price</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text>$</InputGroup.Text>

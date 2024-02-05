@@ -34,7 +34,7 @@ const InvoiceList = () => {
         </div>
       ) : (
         <div className="d-flex flex-column">
-          <div className="d-flex flex-row align-items-center justify-content-between">
+          <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
             <h3 className="fw-bold pb-2 pb-md-4">Invoice List</h3>
             <Link to="/create">
               <Button variant="primary mb-2 mb-md-4">Create Invoice</Button>
@@ -52,7 +52,7 @@ const InvoiceList = () => {
                 placeholder="Enter Invoice ID to copy"
                 className="bg-white border"
                 style={{
-                  height: "50px",
+                  height: "40px",
                 }}
               />
             </div>
