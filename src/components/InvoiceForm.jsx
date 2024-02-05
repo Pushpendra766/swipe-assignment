@@ -54,15 +54,7 @@ const InvoiceForm = () => {
           discountRate: "",
           discountAmount: "0.00",
           currency: "$",
-          items: [
-            {
-              itemId: 0,
-              itemName: "",
-              itemDescription: "",
-              itemPrice: "1.00",
-              itemQuantity: 1,
-            },
-          ],
+          items: [],
         }
   );
 
@@ -71,22 +63,14 @@ const InvoiceForm = () => {
   }, []);
 
   const handleRowDel = (itemToDelete) => {
-    const updatedItems = formData.items.filter(
-      (item) => item.itemId !== itemToDelete.itemId
-    );
+    const updatedItems = formData.items.filter((item) => {
+      return item.itemId !== itemToDelete.itemId;
+    });
     setFormData({ ...formData, items: updatedItems });
     handleCalculateTotal();
   };
 
-  const handleAddEvent = () => {
-    const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    const newItem = {
-      itemId: id,
-      itemName: "",
-      itemDescription: "",
-      itemPrice: "1.00",
-      itemQuantity: 1,
-    };
+  const handleAddEvent = (newItem) => {
     setFormData({
       ...formData,
       items: [...formData.items, newItem],
@@ -304,8 +288,8 @@ const InvoiceForm = () => {
             <hr />
             <InvoiceItem
               onItemizedItemEdit={onItemizedItemEdit}
-              onRowAdd={handleAddEvent}
-              onRowDel={handleRowDel}
+              onRowAdd={(newItem) => handleAddEvent(newItem)}
+              onRowDel={(itemToDelete) => handleRowDel(itemToDelete)}
               currency={formData.currency}
               items={formData.items}
             />

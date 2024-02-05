@@ -21,6 +21,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
     sellingPrice: isEdit ? currentProduct.sellingPrice : "",
     buyingPrice: isEdit ? currentProduct.buyingPrice : "",
     quantityAvailable: isEdit ? currentProduct.quantityAvailable : "",
+    category: isEdit ? currentProduct.category : "",
   });
 
   const updateFormData = (key, newValue) => {
@@ -67,7 +68,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               Product Name is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="2">
             <Form.Label>Quantity</Form.Label>
             <Form.Control
               required
@@ -82,7 +83,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               Quantity is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="2">
             <Form.Label>Selling Price</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
@@ -98,7 +99,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="2">
             <Form.Label>Buying Price</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text>$</InputGroup.Text>
@@ -113,6 +114,23 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
                 Buying price is required!
               </Form.Control.Feedback>
             </InputGroup>
+          </Form.Group>
+          <Form.Group as={Col} md="3">
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              as="select"
+              required
+              value={formData.category}
+              onChange={(e) => updateFormData("category", e.target.value)}
+            >
+              <option value="">Select a category</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Electronics">Electronics</option>
+            </Form.Control>
+            <Form.Control.Feedback type="invalid">
+              Please select a category!
+            </Form.Control.Feedback>
           </Form.Group>
         </Row>
         <Button className="fw-bold" type="submit">

@@ -20,9 +20,18 @@ const ProductSearch = ({ products, onItemClick }) => {
   };
 
   const handleItemClick = (item) => {
+    const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+    const newItem = {
+      itemId: id,
+      itemName: item.name,
+      itemCategory: item.category,
+      itemDescription: "",
+      itemPrice: item.sellingPrice,
+      itemQuantity: 1,
+    };
+    onItemClick(newItem);
     setSearchTerm("");
     setSuggestedProducts([]);
-    onItemClick(item);
   };
 
   return (
