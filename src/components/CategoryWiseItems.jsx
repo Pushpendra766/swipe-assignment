@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import { BiTrash } from "react-icons/bi";
@@ -13,7 +13,7 @@ const CategoryWiseItems = (props) => {
         if (
           items.filter((item) => item.itemCategory === category).length === 0
         ) {
-          return;
+          return null;
         }
         return (
           <div key={category}>

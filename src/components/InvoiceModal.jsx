@@ -81,7 +81,7 @@ const InvoiceModal = (props) => {
                 props.items.filter((item) => item.itemCategory === category)
                   .length === 0
               ) {
-                return;
+                return null;
               }
               return (
                 <div key={category} className="mt-2">
