@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import { BiPaperPlane, BiCloudDownload } from "react-icons/bi";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { categories } from "../utils/categoryData";
 
 const GenerateInvoice = () => {
   html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
@@ -75,34 +76,58 @@ const InvoiceModal = (props) => {
                 <div>{props.info.dateOfIssue || ""}</div>
               </Col>
             </Row>
-            <Table className="mb-0">
-              <thead>
-                <tr>
-                  <th>QTY</th>
-                  <th>DESCRIPTION</th>
-                  <th className="text-end">PRICE</th>
-                  <th className="text-end">AMOUNT</th>
-                </tr>
-              </thead>
-              <tbody>
-                {props.items.map((item, i) => {
-                  return (
-                    <tr id={i} key={i}>
-                      <td style={{ width: "70px" }}>{item.itemQuantity}</td>
-                      <td>
-                        {item.itemName} - {item.itemDescription}
-                      </td>
-                      <td className="text-end" style={{ width: "100px" }}>
-                        {props.currency} {item.itemPrice}
-                      </td>
-                      <td className="text-end" style={{ width: "100px" }}>
-                        {props.currency} {item.itemPrice * item.itemQuantity}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+            {categories.map((category) => {
+              if (
+                props.items.filter((item) => item.itemCategory === category)
+                  .length === 0
+              ) {
+                return;
+              }
+              return (
+                <div key={category} className="mt-2">
+                  <p className="text-center fw-semibold fs-6">{category}</p>
+                  <Table className="mb-0">
+                    <thead>
+                      <tr>
+                        <th>Qty</th>
+                        <th>Name</th>
+                        <th className="text-end">Price</th>
+                        <th className="text-end">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {props.items
+                        .filter((item) => item.itemCategory === category)
+                        .map((item, i) => {
+                          return (
+                            <tr id={i} key={i}>
+                              <td style={{ width: "70px" }}>
+                                {item.itemQuantity}
+                              </td>
+                              <td>
+                                {item.itemName} - {item.itemDescription}
+                              </td>
+                              <td
+                                className="text-end"
+                                style={{ width: "100px" }}
+                              >
+                                {props.currency} {item.itemPrice}
+                              </td>
+                              <td
+                                className="text-end"
+                                style={{ width: "100px" }}
+                              >
+                                {props.currency}{" "}
+                                {item.itemPrice * item.itemQuantity}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </Table>
+                </div>
+              );
+            })}
             <Table>
               <tbody>
                 <tr>

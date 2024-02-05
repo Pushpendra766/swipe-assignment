@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 import { BiTrash } from "react-icons/bi";
 import EditableField from "./EditableField";
-import { useSelector } from "react-redux";
-import ProductSearch from "./ProductSearch";
+import { categories } from "../utils/categoryData";
 
 const CategoryWiseItems = (props) => {
   const { items, onItemizedItemEdit, onRowDel } = props;
-  const categories = ["Electronics", "Stationery", "Grocery"];
   return (
     <>
       {categories.map((category) => {
