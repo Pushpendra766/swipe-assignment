@@ -192,7 +192,13 @@ const InvoiceForm = () => {
       alert("Invoice does not exists!!!!!");
     }
   };
-
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
   return (
     <Form onSubmit={openModal}>
       <div className="d-flex align-items-center">
@@ -224,6 +230,7 @@ const InvoiceForm = () => {
                     onChange={(e) => editField(e.target.name, e.target.value)}
                     style={{ maxWidth: "150px" }}
                     required
+                    min={getCurrentDate()}
                   />
                 </div>
               </div>
