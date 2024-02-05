@@ -1,6 +1,6 @@
 const productData = [
   {
-    id: 1,
+    id: "g5qfj3pv",
     name: "Brush",
     category: "Grocery",
     sellingPrice: 30,
@@ -9,7 +9,7 @@ const productData = [
     description: "Cleaning tool",
   },
   {
-    id: 2,
+    id: "h1btg5qf",
     name: "Notebook",
     category: "Stationery",
     sellingPrice: 10,
@@ -18,7 +18,7 @@ const productData = [
     description: "Writing pad",
   },
   {
-    id: 3,
+    id: "vh1bug5q",
     name: "Headphones",
     category: "Electronics",
     sellingPrice: 50,
@@ -27,7 +27,7 @@ const productData = [
     description: "Audio devices",
   },
   {
-    id: 4,
+    id: "pvh1bvg5",
     name: "Shampoo",
     category: "Grocery",
     sellingPrice: 15,
@@ -36,7 +36,7 @@ const productData = [
     description: "Hair care",
   },
   {
-    id: 5,
+    id: "vh1bwxg5",
     name: "Pen Set",
     category: "Stationery",
     sellingPrice: 8,
@@ -45,7 +45,7 @@ const productData = [
     description: "Writing tools",
   },
   {
-    id: 6,
+    id: "g5pvh1bx",
     name: "Laptop",
     category: "Electronics",
     sellingPrice: 800,
@@ -54,7 +54,7 @@ const productData = [
     description: "Portable computer",
   },
   {
-    id: 7,
+    id: "vh1byg5q",
     name: "Bread",
     category: "Grocery",
     sellingPrice: 2,
@@ -63,7 +63,7 @@ const productData = [
     description: "Bakery item",
   },
   {
-    id: 8,
+    id: "vh1bzg5q",
     name: "Eraser",
     category: "Stationery",
     sellingPrice: 1,
@@ -72,7 +72,7 @@ const productData = [
     description: "Correction tool",
   },
   {
-    id: 9,
+    id: "vh1cag5q",
     name: "Smartphone",
     category: "Electronics",
     sellingPrice: 400,
@@ -81,7 +81,7 @@ const productData = [
     description: "Mobile device",
   },
   {
-    id: 10,
+    id: "h1cbg5qf",
     name: "Milk",
     category: "Grocery",
     sellingPrice: 3,

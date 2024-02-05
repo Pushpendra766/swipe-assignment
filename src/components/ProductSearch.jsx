@@ -20,9 +20,8 @@ const ProductSearch = ({ products, onItemClick }) => {
   };
 
   const handleItemClick = (item) => {
-    const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     const newItem = {
-      itemId: id,
+      itemId: item.id,
       itemName: item.name,
       itemCategory: item.category,
       itemDescription: item.description,

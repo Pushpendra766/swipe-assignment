@@ -14,7 +14,9 @@ const ProductRow = ({ product, handleEditProduct }) => {
   return (
     <tr>
       <td>{product.id}</td>
-      <td className="fw-normal">{product.name}</td>
+      <td className="fw-normal">
+        {product.name} - {product.description}
+      </td>
       <td className="fw-normal">{product.quantityAvailable}</td>
       <td className="fw-normal">{product.sellingPrice}</td>
       <td className="fw-normal">{product.buyingPrice}</td>

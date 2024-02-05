@@ -3,18 +3,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/productsSlice";
-import { useSelector } from "react-redux";
 import { updateProduct } from "../redux/productsSlice";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import { updateInvoiceItem } from "../redux/invoicesSlice";
 
 const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
   const isEdit = Object.keys(currentProduct).length !== 0;
-  const products = useSelector((store) => store.products.products);
-  const productId =
-    products.length > 0 ? products[products.length - 1].id + 1 : 1;
+  const productId = (+new Date() + Math.floor(Math.random() * 999999)).toString(
+    36
+  );
   const [formData, setFormData] = useState({
     id: isEdit ? currentProduct.id : productId,
     name: isEdit ? currentProduct.name : "",
@@ -31,6 +31,15 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
   const dispatch = useDispatch();
   const handleAddProduct = () => {
     if (isEdit) {
+      const updatedItem = {
+        itemName: formData.name,
+        itemCategory: formData.category,
+        itemDescription: formData.description,
+        itemPrice: formData.sellingPrice,
+      };
+      dispatch(
+        updateInvoiceItem({ productId: currentProduct.id, updatedItem })
+      );
       dispatch(
         updateProduct({ id: currentProduct.id, updatedObject: formData })
       );
