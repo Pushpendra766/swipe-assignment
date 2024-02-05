@@ -18,6 +18,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
   const [formData, setFormData] = useState({
     id: isEdit ? currentProduct.id : productId,
     name: isEdit ? currentProduct.name : "",
+    description: isEdit ? currentProduct.description : "",
     sellingPrice: isEdit ? currentProduct.sellingPrice : "",
     buyingPrice: isEdit ? currentProduct.buyingPrice : "",
     quantityAvailable: isEdit ? currentProduct.quantityAvailable : "",
@@ -55,7 +56,7 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
       <h5>Add Product</h5>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="4">
             <Form.Label>Name</Form.Label>
             <Form.Control
               required
@@ -68,54 +69,20 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
               Product Name is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="2">
-            <Form.Label>Quantity</Form.Label>
+          <Form.Group as={Col} md="4">
+            <Form.Label>Description</Form.Label>
             <Form.Control
               required
-              type="number"
-              placeholder="Quantity"
-              value={formData.quantityAvailable}
-              onChange={(e) =>
-                updateFormData("quantityAvailable", e.target.value)
-              }
+              type="text"
+              placeholder="Product description"
+              value={formData.description}
+              onChange={(e) => updateFormData("description", e.target.value)}
             />
             <Form.Control.Feedback type="invalid">
-              Quantity is required!
+              Product Description is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="2">
-            <Form.Label>Selling Price</Form.Label>
-            <InputGroup hasValidation>
-              <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
-              <Form.Control
-                type="number"
-                placeholder="Selling Price"
-                required
-                value={formData.sellingPrice}
-                onChange={(e) => updateFormData("sellingPrice", e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Selling price is required!
-              </Form.Control.Feedback>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group as={Col} md="2">
-            <Form.Label>Buying Price</Form.Label>
-            <InputGroup hasValidation>
-              <InputGroup.Text>$</InputGroup.Text>
-              <Form.Control
-                type="number"
-                placeholder="Buying Price"
-                required
-                value={formData.buyingPrice}
-                onChange={(e) => updateFormData("buyingPrice", e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Buying price is required!
-              </Form.Control.Feedback>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group as={Col} md="3">
+          <Form.Group as={Col} md="4">
             <Form.Label>Category</Form.Label>
             <Form.Control
               as="select"
@@ -131,6 +98,55 @@ const ProductForm = ({ currentProduct, updateProductModalOpen }) => {
             <Form.Control.Feedback type="invalid">
               Please select a category!
             </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4">
+            <Form.Label>Quantity</Form.Label>
+            <Form.Control
+              required
+              type="number"
+              placeholder="Quantity"
+              value={formData.quantityAvailable}
+              onChange={(e) =>
+                updateFormData("quantityAvailable", e.target.value)
+              }
+            />
+            <Form.Control.Feedback type="invalid">
+              Quantity is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Label>Selling Price</Form.Label>
+            <InputGroup hasValidation>
+              <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
+              <Form.Control
+                type="number"
+                placeholder="Selling Price"
+                required
+                value={formData.sellingPrice}
+                onChange={(e) => updateFormData("sellingPrice", e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid">
+                Selling price is required!
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+          <Form.Group as={Col} md="4">
+            <Form.Label>Buying Price</Form.Label>
+            <InputGroup hasValidation>
+              <InputGroup.Text>$</InputGroup.Text>
+              <Form.Control
+                type="number"
+                placeholder="Buying Price"
+                required
+                value={formData.buyingPrice}
+                onChange={(e) => updateFormData("buyingPrice", e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid">
+                Buying price is required!
+              </Form.Control.Feedback>
+            </InputGroup>
           </Form.Group>
         </Row>
         <Button className="fw-bold" type="submit">

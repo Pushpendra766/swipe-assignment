@@ -25,7 +25,7 @@ const ProductSearch = ({ products, onItemClick }) => {
       itemId: id,
       itemName: item.name,
       itemCategory: item.category,
-      itemDescription: "",
+      itemDescription: item.description,
       itemPrice: item.sellingPrice,
       itemQuantity: 1,
     };

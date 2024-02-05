@@ -21,7 +21,8 @@ const CategoryWiseItems = (props) => {
             <Table>
               <thead>
                 <tr>
-                  <th>Item</th>
+                  <th>Name</th>
+                  <th>Description</th>
                   <th>Qty</th>
                   <th>Price</th>
                   <th className="text-center">Action</th>
@@ -33,7 +34,7 @@ const CategoryWiseItems = (props) => {
                   .map((item) => {
                     return (
                       <tr key={item.itemId}>
-                        <td style={{ width: "100%" }}>
+                        <td style={{ width: "50%" }}>
                           <EditableField
                             onItemizedItemEdit={(evt) =>
                               onItemizedItemEdit(evt, item.itemId)
@@ -43,6 +44,20 @@ const CategoryWiseItems = (props) => {
                               name: "itemName",
                               placeholder: "Item name",
                               value: item.itemName,
+                              id: item.itemId,
+                            }}
+                          />
+                        </td>
+                        <td style={{ width: "50%" }}>
+                          <EditableField
+                            onItemizedItemEdit={(evt) =>
+                              onItemizedItemEdit(evt, item.itemId)
+                            }
+                            cellData={{
+                              type: "text",
+                              name: "itemDescription",
+                              placeholder: "Item description",
+                              value: item.itemDescription,
                               id: item.itemId,
                             }}
                           />

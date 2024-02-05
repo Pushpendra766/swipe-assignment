@@ -6,6 +6,7 @@ const productData = [
     sellingPrice: 30,
     buyingPrice: 25,
     quantityAvailable: 20,
+    description: "Cleaning tool",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ const productData = [
     sellingPrice: 10,
     buyingPrice: 8,
     quantityAvailable: 50,
+    description: "Writing pad",
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ const productData = [
     sellingPrice: 50,
     buyingPrice: 40,
     quantityAvailable: 15,
+    description: "Audio devices",
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ const productData = [
     sellingPrice: 15,
     buyingPrice: 12,
     quantityAvailable: 25,
+    description: "Hair care",
   },
   {
     id: 5,
@@ -38,6 +42,7 @@ const productData = [
     sellingPrice: 8,
     buyingPrice: 6,
     quantityAvailable: 30,
+    description: "Writing tools",
   },
   {
     id: 6,
@@ -46,6 +51,7 @@ const productData = [
     sellingPrice: 800,
     buyingPrice: 700,
     quantityAvailable: 10,
+    description: "Portable computer",
   },
   {
     id: 7,
@@ -54,6 +60,7 @@ const productData = [
     sellingPrice: 2,
     buyingPrice: 1.5,
     quantityAvailable: 100,
+    description: "Bakery item",
   },
   {
     id: 8,
@@ -62,6 +69,7 @@ const productData = [
     sellingPrice: 1,
     buyingPrice: 0.8,
     quantityAvailable: 50,
+    description: "Correction tool",
   },
   {
     id: 9,
@@ -70,6 +78,7 @@ const productData = [
     sellingPrice: 400,
     buyingPrice: 350,
     quantityAvailable: 20,
+    description: "Mobile device",
   },
   {
     id: 10,
@@ -78,6 +87,7 @@ const productData = [
     sellingPrice: 3,
     buyingPrice: 2,
     quantityAvailable: 30,
+    description: "Dairy product",
   },
 ];
 
